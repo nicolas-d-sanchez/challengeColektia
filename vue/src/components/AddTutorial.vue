@@ -25,8 +25,10 @@
       </div>
 
       <div class="form-group">
-        <label for="description">Imagen</label>
+        <label for="formFile">Imagen</label>
         <input
+          class="form-control" 
+          id="formFile"
           type="file"
           ref="file"
           required
@@ -34,7 +36,7 @@
         />
       </div>
 
-      <button @click="saveTutorial" class="btn btn-success">Submit</button>
+      <button @click="saveTutorial" class="btn btn-success mt-2">Submit</button>
     </div>
 
     <div v-else>
@@ -69,21 +71,11 @@ export default {
     },
 
      saveTutorial() {
-      // var data = {
-      //   image: this.tutorial.image,
-      //   title: this.tutorial.title,
-      //   description: this.tutorial.description
-      // };
-
-       const formData = new FormData()
+        const formData = new FormData()
 
         formData.append('image', this.tutorial.image)
         formData.append('title', this.tutorial.title)
         formData.append('description', this.tutorial.description)
-
-      console.log(formData);
-
-
 
        TutorialDataService.create(formData)
         .then(response => {

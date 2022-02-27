@@ -78,6 +78,7 @@ exports.findOne = (req, res) => {
 // Update a Tutorial by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
+  
 
   Tutorial.update(req.body, {
     where: { id: id }
