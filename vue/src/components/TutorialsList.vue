@@ -35,7 +35,8 @@
         <h4>Tutorial</h4>
         <div>
           <label><strong>Image:</strong></label>
-          <img :src="'http://localhost:8080/'+currentTutorial.image " />  
+          <br>
+          <img width="150px" :src="'http://localhost:8080/'+currentTutorial.image " />  
         </div>
         <div>
           <label><strong>Title:</strong></label> {{ currentTutorial.title }}
