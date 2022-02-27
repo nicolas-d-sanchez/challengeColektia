@@ -32,8 +32,8 @@ app.get("/", (req, res) => {
 require("./app/routes/turorial.routes")(app);
 
 //static Images Folder
-
-app.use('/app/images', express.static('./app/images'))
+// app.use('/Images', express.static('./Images'))
+app.use('/images', express.static('images'));
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

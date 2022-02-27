@@ -1,5 +1,5 @@
 <template>
-  <div class="submit-form">
+  <div class="submit-form" >
     <div v-if="!submitted">
       <div class="form-group">
         <label for="title">Title</label>
@@ -24,6 +24,16 @@
         />
       </div>
 
+      <div class="form-group">
+        <label for="description">Imagen</label>
+        <input
+          type="file"
+          ref="file"
+          required
+          @change="selectFile"
+        />
+      </div>
+
       <button @click="saveTutorial" class="btn btn-success">Submit</button>
     </div>
 
@@ -45,19 +55,37 @@ export default {
         id: null,
         title: "",
         description: "",
+        image: "",
         published: false
       },
       submitted: false
     };
   },
   methods: {
-    saveTutorial() {
-      var data = {
-        title: this.tutorial.title,
-        description: this.tutorial.description
-      };
+    selectFile(){
+        const file = this.$refs.file.files[0];
+        this.tutorial.image = file;
+        console.log(this.tutorial.image)
+    },
 
-      TutorialDataService.create(data)
+     saveTutorial() {
+      // var data = {
+      //   image: this.tutorial.image,
+      //   title: this.tutorial.title,
+      //   description: this.tutorial.description
+      // };
+
+       const formData = new FormData()
+
+        formData.append('image', this.tutorial.image)
+        formData.append('title', this.tutorial.title)
+        formData.append('description', this.tutorial.description)
+
+      console.log(formData);
+
+
+
+       TutorialDataService.create(formData)
         .then(response => {
           this.tutorial.id = response.data.id;
           console.log(response.data);
@@ -66,7 +94,7 @@ export default {
         .catch(e => {
           console.log(e);
         });
-    },
+      },
     
     newTutorial() {
       this.submitted = false;
